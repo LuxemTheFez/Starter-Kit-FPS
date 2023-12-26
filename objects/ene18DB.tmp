@@ -1,12 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://d2g78tpqbyf5g"]
+[gd_scene load_steps=9 format=3 uid="uid://d2g78tpqbyf5g"]
 
 [ext_resource type="PackedScene" uid="uid://lde2xq3vq635" path="res://models/enemy-flying.glb" id="1_3v8nl"]
 [ext_resource type="Script" path="res://objects/enemy.gd" id="1_jg24b"]
 [ext_resource type="SpriteFrames" uid="uid://dbv3sy5qjatnl" path="res://sprites/burst_animation.tres" id="3_iblw5"]
 [ext_resource type="Script" path="res://objects/StateMachine.gd" id="4_3u838"]
-[ext_resource type="Script" path="res://scripts/state/enemyFollow.gd" id="5_ejge7"]
-[ext_resource type="Script" path="res://scripts/state/enemyIdle.gd" id="5_rvwaw"]
-[ext_resource type="Script" path="res://scripts/state/enemyShoot.gd" id="7_ljj6d"]
+[ext_resource type="Script" path="res://scripts/state/EnemyFollow.gd" id="5_cb58y"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_iix87"]
 radius = 0.75
@@ -15,9 +13,6 @@ radius = 0.75
 size = Vector3(2, 2.2, 3.4)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ikdpe"]
-points = PackedVector3Array(-1, -1.1, -1.7, 1, -1.1, -1.7, -1, -1.1, 1.7, 0, 1.1, -1.7, 1, -1.1, 1.7, 0, 1.1, 1.7)
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kbxbc"]
 points = PackedVector3Array(-1, -1.1, -1.7, 1, -1.1, -1.7, -1, -1.1, 1.7, 0, 1.1, -1.7, 1, -1.1, 1.7, 0, 1.1, 1.7)
 
 [node name="enemy-flying" type="CharacterBody3D"]
@@ -46,25 +41,18 @@ sprite_frames = ExtResource("3_iblw5")
 frame = 2
 
 [node name="Timer" type="Timer" parent="."]
-process_callback = 0
 wait_time = 0.25
-one_shot = true
+autostart = true
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("init_state")]
 script = ExtResource("4_3u838")
-init_state = NodePath("Idle")
+init_state = NodePath("EnemyIdle")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("5_rvwaw")
-enemy = NodePath("../..")
+[node name="EnemyIdle" type="Node" parent="StateMachine"]
+script = ExtResource("5_cb58y")
 
-[node name="Follow" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("5_ejge7")
-enemy = NodePath("../..")
-
-[node name="Shoot" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy")]
-script = ExtResource("7_ljj6d")
-enemy = NodePath("../..")
+[node name="EnemyFollow" type="Node" parent="StateMachine"]
+script = ExtResource("5_cb58y")
 
 [node name="PlayerDetection" type="Area3D" parent="."]
 collision_layer = 0
@@ -76,19 +64,9 @@ mesh = SubResource("PrismMesh_ux8cg")
 skeleton = NodePath("../../Model")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetection"]
-transform = Transform3D(5.317, 0, 0, 0, -2.2813e-07, 1.231, 0, -5.219, -5.38087e-08, 0, 0.086, 4.28)
+transform = Transform3D(4.52654, 0, 0, 0, -1.71759e-07, 1.23086, 0, -3.92938, -5.38026e-08, 0, 0.0860184, 3.61479)
 shape = SubResource("ConvexPolygonShape3D_ikdpe")
 
-[node name="PlayerShootRange" type="Area3D" parent="."]
-collision_layer = 0
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerShootRange"]
-transform = Transform3D(3.205, 0, 0, 0, -1.02285e-07, 1.275, 0, -2.34, -5.5732e-08, 0, 0, 2.909)
-shape = SubResource("ConvexPolygonShape3D_kbxbc")
-
-[connection signal="body_entered" from="PlayerDetection" to="StateMachine/Idle" method="_on_player_detection_body_entered"]
-[connection signal="body_entered" from="PlayerDetection" to="StateMachine/Follow" method="_on_player_detection_body_entered"]
-[connection signal="body_exited" from="PlayerDetection" to="StateMachine/Follow" method="_on_player_detection_body_exited"]
-[connection signal="body_entered" from="PlayerShootRange" to="StateMachine/Follow" method="_on_player_shoot_range_body_entered"]
-[connection signal="body_entered" from="PlayerShootRange" to="StateMachine/Shoot" method="_on_player_shoot_range_body_entered"]
-[connection signal="body_exited" from="PlayerShootRange" to="StateMachine/Shoot" method="_on_player_shoot_range_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="PlayerDetection" to="StateMachine/EnemyFollow" method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="StateMachine/EnemyFollow" method="_on_player_detection_body_exited"]

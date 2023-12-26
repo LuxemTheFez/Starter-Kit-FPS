@@ -13,6 +13,7 @@ height = 1.0
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+collision_mask = 10
 script = ExtResource("1_ffboj")
 weapons = Array[Resource("res://scripts/weapon.gd")]([ExtResource("3_kr4p8"), ExtResource("2_6epbw")])
 
@@ -55,11 +56,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.75, -6)
 layers = 2
 sprite_frames = ExtResource("4_m6ukc")
 frame = 2
+frame_progress = 1.0
 
 [node name="RayCast" type="RayCast3D" parent="Head/Camera"]
+transform = Transform3D(0.999997, 0.00194334, -0.00176848, -0.00194119, 0.999997, 0.00122234, 0.00177083, -0.00121893, 0.999998, 0, 0, 0)
 exclude_parent = false
 target_position = Vector3(0, 0, -10)
+collision_mask = 10
 collide_with_areas = true
+debug_shape_thickness = 1
 
 [node name="Shadow" type="Decal" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)

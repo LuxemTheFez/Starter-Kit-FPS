@@ -1,4 +1,4 @@
-extends Node3D
+extends CharacterBody3D
 
 @export var player: Node3D
 
@@ -18,13 +18,17 @@ func _ready():
 
 
 func _process(delta):
-	self.look_at(player.position + Vector3(0, 0.5, 0), Vector3.UP, true)  # Look at player
+	#self.look_at(player.position + Vector3(0, 0.5, 0), Vector3.UP, true)  # Look at player
 	target_position.y += (cos(time * 5) * 1) * delta  # Sine movement (up and down)
 
 	time += delta
 
-	position = target_position
+	move_and_slide()
+	position.y = target_position.y
 
+	if velocity != Vector3.ZERO:
+		var lookdir = atan2(velocity.x, velocity.z)
+		rotation.y = lerp(rotation.y, lookdir, 0.09)
 # Take damage from player
 
 func damage(amount):
@@ -45,24 +49,38 @@ func destroy():
 
 # Shoot when timer hits 0
 
-func _on_timer_timeout():
-	raycast.force_raycast_update()
+func shoot(target: CharacterBody3D):
 
-	if raycast.is_colliding():
-		var collider = raycast.get_collider()
+	muzzle_a.frame = 0
+	muzzle_a.play("default")
+	muzzle_a.rotation_degrees.z = randf_range(-45, 45)
 
-		if collider.has_method("damage"):  # Raycast collides with player
-			
-			# Play muzzle flash animation(s)
+	muzzle_b.frame = 0
+	muzzle_b.play("default")
+	muzzle_b.rotation_degrees.z = randf_range(-45, 45)
 
-			muzzle_a.frame = 0
-			muzzle_a.play("default")
-			muzzle_a.rotation_degrees.z = randf_range(-45, 45)
+	Audio.play("sounds/enemy_attack.ogg")
 
-			muzzle_b.frame = 0
-			muzzle_b.play("default")
-			muzzle_b.rotation_degrees.z = randf_range(-45, 45)
+	target.damage(5)  # Apply damage to player
 
-			Audio.play("sounds/enemy_attack.ogg")
-
-			collider.damage(5)  # Apply damage to player
+#func _on_timer_timeout():
+	#raycast.force_raycast_update()
+#
+	#if raycast.is_colliding():
+		#var collider = raycast.get_collider()
+#
+		#if collider.has_method("damage"):  # Raycast collides with player
+			#
+			## Play muzzle flash animation(s)
+#
+			#muzzle_a.frame = 0
+			#muzzle_a.play("default")
+			#muzzle_a.rotation_degrees.z = randf_range(-45, 45)
+#
+			#muzzle_b.frame = 0
+			#muzzle_b.play("default")
+			#muzzle_b.rotation_degrees.z = randf_range(-45, 45)
+#
+			#Audio.play("sounds/enemy_attack.ogg")
+#
+			#collider.damage(5)  # Apply damage to player
