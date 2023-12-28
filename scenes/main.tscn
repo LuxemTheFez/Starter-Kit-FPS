@@ -80,40 +80,40 @@ player = NodePath("../../Player")
 [node name="Level" type="Node" parent="."]
 
 [node name="wall-low" parent="Level" instance=ExtResource("5_6vel1")]
-transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -1.92088, 3.4547, -6.90166)
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -1.92088, 0.781965, -6.90166)
 
 [node name="wall-low3" parent="Level" instance=ExtResource("5_6vel1")]
-transform = Transform3D(-1, 0, -1.19209e-07, 0, 1, 0, 1.19209e-07, 0, -1, 6.07912, 3.4547, 6.59834)
+transform = Transform3D(-1, 0, -1.19209e-07, 0, 1, 0, 1.19209e-07, 0, -1, 6.07912, 0.781965, 6.59834)
 
 [node name="platform" parent="Level" instance=ExtResource("5_3s40e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2.4047, 6.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -0.268035, 6.5)
 
 [node name="platform2" parent="Level" instance=ExtResource("5_3s40e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 4.9047, -2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 2.23196, -2.5)
 
 [node name="platform3" parent="Level" instance=ExtResource("5_3s40e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 5.4047, -3.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2.73196, -3.5)
 
 [node name="platform4" parent="Level" instance=ExtResource("5_3s40e")]
-transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 7, 3.4047, -2)
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 7, 0.731965, -2)
 
 [node name="wall-high" parent="Level" instance=ExtResource("7_cabne")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 3.9047, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 1.23196, 4)
 
 [node name="wall-high2" parent="Level" instance=ExtResource("7_cabne")]
-transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 11.5, 5.4047, -5.5)
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 11.5, 2.73196, -5.5)
 
 [node name="platform-large-grass2" parent="Level" instance=ExtResource("7_wggef")]
-transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -2, 2.9047, -6)
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -2, 0.231965, -6)
 
 [node name="platform-large-grass3" parent="Level" instance=ExtResource("7_wggef")]
-transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -6, 3.4047, 2.5)
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -6, 0.731965, 2.5)
 
 [node name="platform-large-grass4" parent="Level" instance=ExtResource("7_wggef")]
-transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 5, 2.9047, 5.5)
+transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, 5, 0.231965, 5.5)
 
 [node name="platform-large-grass5" parent="Level" instance=ExtResource("7_wggef")]
-transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, 12, 4.9047, -5)
+transform = Transform3D(0.866026, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866026, 12, 2.23196, -5)
 
 [node name="platform-large-grass" parent="Level" instance=ExtResource("7_wggef")]
 transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -2, 0)
